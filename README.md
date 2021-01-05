@@ -4,6 +4,7 @@ A gem to interface with the Ecwid REST APIs.
 
 [![Code Climate](https://codeclimate.com/github/vishalzambre/ecwid_api.png)](https://codeclimate.com/github/vishalzambre/ecwid_api)
 [![Build Status](https://travis-ci.org/vishalzambre/ecwid_api.svg?branch=master)](https://travis-ci.org/vishalzambre/ecwid_api)
+[![Gem Version](https://badge.fury.io/rb/ecwid_api.svg)](https://badge.fury.io/rb/ecwid_api)
 
 ## API v3 Warning!
 
