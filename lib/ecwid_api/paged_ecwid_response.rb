@@ -40,7 +40,7 @@ module EcwidApi
           enum_response.body[i].to_i
         end
 
-        if count.positive?
+        if count > 0
           enum_response.body['items'].each do |item|
             yielder << block.call(item)
           end
