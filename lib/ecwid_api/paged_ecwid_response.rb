@@ -1,4 +1,4 @@
-require_relative "paged_enumerator"
+require_relative 'paged_enumerator'
 
 # Public: Presents a paged Ecwid response as an Enumerator with a
 # PagedEnumerator
@@ -31,20 +31,22 @@ module EcwidApi
       params[:limit] = 100
       params.delete(:offset)
 
-      block ||= Proc.new { |item| item }
+      block ||= proc { |item| item }
 
       response = client.get(path, params)
 
-      @paged_enumerator = PagedEnumerator.new(response) do |response, yielder|
-        response.body["items"].each do |item|
-          yielder << block.call(item)
+      @paged_enumerator = PagedEnumerator.new(response) do |enum_response, yielder|
+        count, offset, total = %w[count offset total].map do |i|
+          enum_response.body[i].to_i
         end
 
-        count, offset, total = %w(count offset total).map do |i|
-          response.body[i].to_i
+        if count.positive?
+          enum_response.body['items'].each do |item|
+            yielder << block.call(item)
+          end
         end
 
-        if count == 0 || count + offset >= total
+        if count.zero? || count + offset >= total
           false
         else
           client.get(path, params.merge(offset: offset + count))
