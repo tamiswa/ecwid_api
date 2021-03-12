@@ -89,8 +89,9 @@ module EcwidApi
     # opts   - A Hash of options
     #          :client - The EcwidApi::Client creating the Entity
     #
-    def initialize(data, opts={})
-      @client, @data = opts[:client], data
+    def initialize(data, opts = {})
+      @client   = opts[:client]
+      @data     = data.is_a?(String) ? JSON.parse(data) : data
       @new_data = {}
     end
 

@@ -17,4 +17,10 @@ describe EcwidApi::Api::Products, faraday: true do
       subject.all.first.sku.should == "NC53090"
     end
   end
+
+  describe "#find" do
+    it "finds product by id" do
+      subject.find(41316136).sku.should == "NC53090"
+    end
+  end
 end
